@@ -1,0 +1,22 @@
+#include <iostream>
+#include <string>
+
+
+using namespace std;
+
+int main()
+{
+	string str1 = "10";
+	string str2 = "2.456";
+	string str3 = "456 ¹®ÀÚ¿­";
+
+	int num1 = stoi(str1);
+	int num2 = stoi(str2);
+	int num3 = stoi(str3);
+
+	cout << num1 << endl;
+	cout << num2 << endl;
+	cout << num3 << endl;
+
+	return 0;
+}

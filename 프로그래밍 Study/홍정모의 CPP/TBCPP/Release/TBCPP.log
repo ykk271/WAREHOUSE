@@ -1,0 +1,6 @@
+﻿  코드를 생성하고 있습니다.
+C:\Users\rladp\OneDrive\바탕 화면\CODING\TBCPP\TBCPP\9.10.cpp(34): error C4716: 'doSomthing': 값을 반환해야 합니다.
+  13 of 14 functions (92.9%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+LINK : fatal error LNK1257: 코드를 생성하지 못했습니다.
