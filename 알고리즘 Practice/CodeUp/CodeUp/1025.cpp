@@ -1,0 +1,19 @@
+#include<iostream>
+//#define _CRT_SECURE_NO_WARNINGS
+
+using namespace std;
+
+int main() {
+
+	int a, b, c, d, e;
+	
+	scanf_s("%1d%1d%1d%1d%1d", &a, &b, &c, &d, &e);
+
+	printf("[%d]\n", a * 10000);
+	printf("[%d]\n", b * 1000);
+	printf("[%d]\n", c * 100);
+	printf("[%d]\n", d * 10);
+	printf("[%d]\n", e * 1);
+
+	return 0;
+}
