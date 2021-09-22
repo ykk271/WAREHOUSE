@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>2f7d8d47-be86-4a2f-9281-b9d0d9a7890b</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Titanic.py</StartupFile>
+    <StartupFile>London bike sharing.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="London bike sharing.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Santander Product Recommendation.py" />
     <Compile Include="Titanic.py" />
   </ItemGroup>

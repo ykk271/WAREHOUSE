@@ -4,5 +4,5 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-dataPath = 'D:/GIT/MachineLearning\Kaggle/Kaggle/titanic/'
+dataPath = 'D:/GIT/kaggle data/titanic/'
 dataName = 'train.csv'

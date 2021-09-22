@@ -114,18 +114,16 @@ for col in cat_cols:
 skip_cols = ['ncoderps', 'renta']
 
 fig = plt.figure()
+f, ax = plt.subplots(figsize = (15, 8))
 i = 1
-for col in train.columns:
+for col in train.columns[:24]:
     if col in skip_cols:
         continue
-
+    plt.subplot(6,4,i)
     sns.countplot(x=col,data=train,alpha=0.5)
-    ax = plt.gca()
-    ax.axes.xaxis.set_visible(False)
-    ax.axes.yaxis.set_visible(False)
-    ax = fig.add_subplot(6, 8, i)
-
     i += 1
 
-
 plt.show()
+
+# 시계열 데이터 시각화
+
