@@ -33,7 +33,7 @@ df.info()
 # 결측치 확인
 df.isna().sum()
 msno.matrix(df)
-#plt.show()
+plt.show()
 
 # 데이터 생성
 df['timestamp']
@@ -57,10 +57,10 @@ plt.subplot(2,2,3)
 sns.boxplot(df['dayofweek'], df['cnt']) # 평일이 많음
 plt.subplot(2,2,4)
 sns.boxplot(df['hour'], df['cnt'], palette = 'Set3') # 출퇴근시간이 많음
-#plt.show()
+plt.show()
 
 sns.barplot(x='weather_code', y='cnt', data=df)
-#plt.show()
+plt.show()
 
 # preprocessing
 # remove outlier
@@ -113,16 +113,16 @@ x_test.shape
 y_train.shape
 y_test.shape
 
+# 평가 도구
+from sklearn.metrics import mean_squared_error
+def RMSE(y_test, y_predict):
+    return np.sqrt(mean_squared_error(y_test, y_predict))
+
 # 딥러닝
 import keras
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.callbacks import EarlyStopping
-
-#from tensorflow.keras.models import Sequential
-#from tensorflow.keras.layers import Dense
-#from tensorflow.keras.models import Sequential
-#from tensorflow.keras.EarlyStopping import EarlyStopping
 
 model = Sequential()
 model.add(Dense(units=128, activation = 'relu', input_dim = 63))
@@ -135,10 +135,65 @@ model.summary()
 model.compile(loss = 'mae', optimizer='adam', metrics=['mae'])
 early_stopping = EarlyStopping(monitor='loss', patience=5, mode='min')
 history = model.fit(x_train, y_train,
-                   epochs = 50, batch_size = 1, validation_split = 0.1,
+                   epochs = 5, batch_size = 1, validation_split = 0.1,
                    callbacks = [early_stopping])
 
+plt.plot(history.history['val_loss'])
+plt.plot(history.history['loss'])
+plt.title('loss 비교')
+plt.xlabel('Epochs')
+plt.ylabel('loss')
+plt.legend(['val_loss', 'loss'])
+plt.show()
+
+y_predict = model.predict(x_test)
+print('Deep learning:', RMSE(y_test, y_predict))
+
 # 머신러닝
+# random forest
+from sklearn.ensemble import RandomForestRegressor
+rf = RandomForestRegressor(n_estimators=100, random_state=777)
+rf.fit(x_train, y_train)
+rf_result = rf.predict(x_test)
+print('Random forest:', RMSE(y_test, rf_result))
+
+# xgboost
+from xgboost import XGBRegressor
+xgb = XGBRegressor(n_estimators = 100, random_state=777)
+xgb.fit(x_train, y_train)
+xgb_result = xgb.predict(x_test)
+print('xgboost:', RMSE(y_test, xgb_result))
+
+# lightgbm
+from lightgbm import LGBMRegressor
+lgb = LGBMRegressor(n_estimators = 100, random_state=777)
+lgb.fit(x_train, y_train)
+lgb_result = lgb.predict(x_test)
+print('lightgbm:', RMSE(y_test, lgb_result))
+
+xgb = pd.DataFrame(xgb_result)
+rf = pd.DataFrame(rf_result)
+dnn = pd.DataFrame(y_predict)
+lgb = pd.DataFrame(lgb_result)
+
+compare = pd.DataFrame(y_test).reset_index(drop=True)
+compare['xgb'] = xgb
+compare['rf'] = rf
+compare['dnn'] = dnn
+compare['lgb'] = lgb
+
+compare.head()
+
+# 커널밀도함수
+sns.kdeplot(compare['cnt'], shade=False, color='r')
+sns.kdeplot(compare['xgb'], shade=False, color='b')
+sns.kdeplot(compare['rf'], shade=False, color='g')
+sns.kdeplot(compare['dnn'], shade=False, color='y')
+sns.kdeplot(compare['lgb'], shade=False, color='k')
+plt.legend(['cnt', 'xgb','rf','dnn','lgb'])
+plt.show()
+
+
 
 
 
