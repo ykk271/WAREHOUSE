@@ -1,3 +1,5 @@
+# https://www.kaggle.com/hmavrodiev/london-bike-sharing-dataset
+
 # 라이브러리
 import numpy as np 
 import pandas as pd
@@ -73,7 +75,6 @@ df_out = df[~df.groupby('hour')['cnt'].apply(is_outliers)]
 
 print('이상치 제거 전:',df.shape)
 print('이상치 제거 후:',df_out.shape)
-
 
 # to category
 df_out['weather_code'] = df_out['weather_code'].astype('category')
