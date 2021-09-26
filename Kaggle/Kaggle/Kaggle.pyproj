@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Bike sharing demand.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="London bike sharing.py">
       <SubType>Code</SubType>
     </Compile>
